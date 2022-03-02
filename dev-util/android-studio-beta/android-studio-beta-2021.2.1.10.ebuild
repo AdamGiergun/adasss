@@ -78,6 +78,7 @@ src_install() {
 	doins -r *
 
 	fperms 755 "${dir}"/bin/{fsnotifier,format.sh,game-tools.sh,inspect.sh,ltedit.sh,profiler.sh,studio.sh,printenv.py,restart.py}
+	fperms -R 755 "${dir}"/bin/{helpers,lldb}
 	fperms -R 755 "${dir}"/jre/bin
 	fperms 755 "${dir}"/jre/lib/{jexec,jspawnhelper}
 	fperms -R 755 "${dir}"/plugins/Kotlin/kotlinc/bin
@@ -86,7 +87,7 @@ src_install() {
 	fperms -R 755 "${dir}"/plugins/android/resources/simpleperf
 	fperms -R 755 "${dir}"/plugins/android/resources/trace_processor_daemon
 	fperms -R 755 "${dir}"/plugins/android/resources/transport/{arm64-v8a,armeabi-v7a,x86,x86_64}
-	fperms -R 755 "${dir}"/plugins/android-ndk/resources/lldb/{android,bin}
+	fperms -R 755 "${dir}"/plugins/android-ndk/resources/lldb/{android,bin,lib,shared}
 	fperms 755 "${dir}"/plugins/c-clangd/bin/clang/linux/{clang-tidy,clangd}
 	fperms -R 755 "${dir}"/plugins/terminal/{,fish}
 	fperms 755 "${dir}"/plugins/textmate/lib/bundles/git/src/{askpass-empty.sh,askpass.sh}
