@@ -4,5 +4,8 @@ This repository is available on [Gentoo repositories](https://repos.gentoo.org) 
 ```
 	eselect repository enable adasss
 ```
- It is possible to report bugs on [Gentoo Bugzilla](https://bugs.gentoo.org/) by starting title with (e.g.) `dev-util/android-studio-2021.1.1.21::adasss`
+ It is possible to report bugs on [Gentoo Bugzilla](https://bugs.gentoo.org/) by starting title with (e.g.) 
+ ```
+ dev-util/android-studio-2021.1.1.21::adasss
+ ```
  
