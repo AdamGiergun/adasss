@@ -101,13 +101,13 @@ src_install() {
 pkg_postinst() {
 	elog ""
 	elog "If you experience app crash while running emulator"
-	elog "with this version, revert to the older one by adding to"
+	elog "with this version, try reverting to the older one by adding to"
 	elog ""
 	elog "    /etc/portage/package.mask"
 	elog ""
 	elog "line:"
 	elog ""
-	elog "    /dev-util/android-studio-canary-2021.3.1.4"
+	elog "    /dev-util/android-studio-canary-2021.3.1.5"
 	elog ""
 }
 
