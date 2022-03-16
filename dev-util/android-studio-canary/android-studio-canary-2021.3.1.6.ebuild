@@ -107,14 +107,15 @@ pkg_postinst() {
 	elog ""
 	elog "line:"
 	elog ""
-	elog "    /dev-util/android-studio-canary-2021.3.1.5"
+	elog "    /dev-util/android-studio-canary-2021.3.1.6"
 	elog ""
 }
 
 pkg_postrm() {
 	elog "Android studio data files were not removed."
-	elog "If there will be no other programs using them anymore,"
-	elog "remove manually folders:"
+	elog "If there will be no other programs using them anymore"
+	elog "(especially another flavor of Android Studio)"
+	elog " remove manually following folders:"
 	elog ""
 	elog "		~/.android/"
 	elog "		~/.config/Google/AndroidStudio*/"
