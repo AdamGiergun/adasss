@@ -10,3 +10,7 @@ This repository is available on [Gentoo repositories](https://repos.gentoo.org) 
  ```
  
 Especially if you experience recently Android Studio crash while trying to run emulator please report it.
+
+
+If you want to support my work in any way you could at least write "Hello" here: [Welcome topic](https://github.com/AdamGiergun/adasss/discussions/1)
+
