@@ -107,7 +107,7 @@ pkg_postinst() {
 	elog ""
 	elog "line:"
 	elog ""
-	elog "    /dev-util/android-studio-canary-2021.3.1.6"
+	elog "    /dev-util/android-studio-canary-2021.3.1.7"
 	elog ""
 }
 
