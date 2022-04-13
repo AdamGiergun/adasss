@@ -14,7 +14,7 @@ It is possible to report bugs on [Gentoo Bugzilla](https://bugs.gentoo.org/) by 
 ```
 But if it regards Android Studio crash, while trying to run emulator, first try to uninstall and install emulator again.
 
-Also, if you haven't seen it yet, take a look at the [the official Gentoo Wiki article on Android Studio](https://wiki.gentoo.org/wiki/Android_studio)
+Also, if you haven't seen it yet, take a look at the [official Gentoo Wiki article on Android Studio](https://wiki.gentoo.org/wiki/Android_studio)
 
 
 If you want to support my work in any way you could at least write "Hello" here: [Welcome topic](https://github.com/AdamGiergun/adasss/discussions/1)
