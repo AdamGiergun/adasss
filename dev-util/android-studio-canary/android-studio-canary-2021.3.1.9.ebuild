@@ -98,18 +98,8 @@ src_install() {
 	make_desktop_entry ${PN} "Android Studio Canary" ${PN} "Development;IDE" "StartupWMClass=jetbrains-studio"
 }
 
-pkg_postinst() {
-	elog ""
-	elog "If you experience app crash while running emulator"
-	elog "with this version, try reverting to the older one by adding to"
-	elog ""
-	elog "    /etc/portage/package.mask"
-	elog ""
-	elog "line:"
-	elog ""
-	elog "    /dev-util/android-studio-canary-2021.3.1.7"
-	elog ""
-}
+#pkg_postinst() {
+#}
 
 pkg_postrm() {
 	elog "Android studio data files were not removed."
