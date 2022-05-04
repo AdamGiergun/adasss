@@ -97,18 +97,8 @@ src_install() {
 	make_desktop_entry ${PN} "Android Studio Beta" ${PN} "Development;IDE" "StartupWMClass=jetbrains-studio"
 }
 
-pkg_postinst() {
-	elog ""
-	elog "If you experience app crash while running emulator"
-	elog "with this version, try reverting to the older one by adding to"
-	elog ""
-	elog "    /etc/portage/package.mask"
-	elog ""
-	elog "line:"
-	elog ""
-	elog "    /dev-util/android-studio-beta-2021.2.1.11"
-	elog ""
-}
+#pkg_postinst() {
+#}
 
 pkg_postrm() {
 	elog "Android studio data files were not removed."
