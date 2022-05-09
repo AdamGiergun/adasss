@@ -8,7 +8,7 @@ Of course, if you want to use my packages immediately, don't forget to do:
 ```
 	$ emerge --sync adasss
 ```
-It is possible to report bugs on [Gentoo Bugzilla](https://bugs.gentoo.org/) by starting title with (e.g.) 
+It is possible to report bugs on [Gentoo Bugzilla](https://bugs.gentoo.org/) by starting title with (e.g.): 
 ```
 	dev-util/android-studio-2021.2.1.14::adasss
 ```
