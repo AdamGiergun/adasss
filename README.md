@@ -10,7 +10,7 @@ Of course, if you want to use my packages immediately, don't forget to do:
 ```
 It is possible to report bugs on [Gentoo Bugzilla](https://bugs.gentoo.org/) by starting title with (e.g.) 
 ```
-	dev-util/android-studio-2021.1.1.22::adasss
+	dev-util/android-studio-2021.2.1.14::adasss
 ```
 But if it regards Android Studio crash, while trying to run emulator, first try to uninstall and install emulator again.
 
