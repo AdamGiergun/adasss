@@ -36,7 +36,9 @@ HOMEPAGE="https://developer.android.com/studio/preview/index.html"
 PROG="android-studio"
 SRC_URI="https://redirector.gvt1.com/edgedl/android/studio/ide-zips/${PV}/${PROG}-${PV}-linux.tar.gz"
 
-LICENSE="Apache-2.0 android-sdk"
+LICENSE="Apache-2.0 android BSD BSD-2 CDDL-1.1 CPL-0.5
+	EPL-1.0 GPL-2 GPL-2+ JDOM IJG LGPL-2.1 MIT
+	MPL-1.1 MPL-2.0 NPL-1.1 OFL ZLIB"
 SLOT="0"
 IUSE="selinux"
 KEYWORDS="~amd64 ~x86"
@@ -102,7 +104,7 @@ src_install() {
 #}
 
 pkg_postrm() {
-	elog "Android studio data files were not removed."
+	elog "Android Studio data files were not removed."
 	elog "If there will be no other programs using them anymore"
 	elog "(especially another flavor of Android Studio)"
 	elog " remove manually following folders:"
