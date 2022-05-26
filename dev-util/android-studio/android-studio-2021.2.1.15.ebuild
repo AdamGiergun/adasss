@@ -15,7 +15,6 @@ QA_PREBUILT="
 	opt/${PN}/jre/lib/server/*
 	opt/${PN}/lib/pty4j-native/linux/*/*
 	opt/${PN}/plugins/android/resources/installer/*/*
-	opt/${PN}/plugins/android/resources/layoutlib/data/linux/lib64/*
 	opt/${PN}/plugins/android/resources/native/*
 	opt/${PN}/plugins/android/resources/perfetto/*/*
 	opt/${PN}/plugins/android/resources/simpleperf/*/*
@@ -26,16 +25,20 @@ QA_PREBUILT="
 	opt/${PN}/plugins/android-ndk/resources/lldb/bin/*
 	opt/${PN}/plugins/android-ndk/resources/lldb/lib/python3.9/lib-dynload/*
 	opt/${PN}/plugins/android-ndk/resources/lldb/lib64/*
+	opt/${PN}/plugins/design-tools/resources/layoutlib/data/linux/lib64/*
 	opt/${PN}/plugins/c-clangd/bin/clang/linux/*
 	opt/${PN}/plugins/webp/lib/libwebp/linux/*
 "
 
 DESCRIPTION="Android development environment based on IntelliJ IDEA"
 HOMEPAGE="https://developer.android.com/studio"
-PROG="android-studio"
-SRC_URI="https://redirector.gvt1.com/edgedl/android/studio/ide-zips/${PV}/${PROG}-${PV}-linux.tar.gz"
+SRC_URI="https://redirector.gvt1.com/edgedl/android/studio/ide-zips/${PV}/${P}-linux.tar.gz"
+#SRC_URI="https://redirector.gvt1.com/edgedl/android/studio/ide-zips/${PV}/${PN}-${PV}-linux.tar.gz"
 
-LICENSE="Apache-2.0 android-sdk"
+LICENSE="Apache-2.0 android BSD BSD-2 CDDL-1.1 CPL-0.5
+	EPL-1.0 GPL-2 GPL-2+ JDOM IJG LGPL-2.1 MIT
+	MPL-1.1 MPL-2.0 NPL-1.1 OFL ZLIB"
+
 SLOT="0"
 IUSE="selinux"
 KEYWORDS="~amd64 ~x86"
@@ -63,7 +66,6 @@ RDEPEND="${DEPEND}
 	>=x11-libs/libdrm-2.4.46
 	>=x11-libs/libxcb-1.9.1
 	>=x11-libs/libxshmfence-1.1
-	dev-libs/libffi-compat:6
 	virtual/libcrypt:=
 "
 
@@ -78,9 +80,8 @@ src_install() {
 	insinto "${dir}"
 	doins -r *
 
-	fperms 755 "${dir}"/bin/{fsnotifier{,64},format.sh,game-tools.sh,inspect.sh,ltedit.sh,profiler.sh,studio.sh,printenv.py,restart.py}
-	fperms -R 755 "${dir}"/bin/helpers
-	fperms -R 755 "${dir}"/bin/lldb
+	fperms 755 "${dir}"/bin/{fsnotifier,format.sh,game-tools.sh,inspect.sh,ltedit.sh,profiler.sh,studio.sh,printenv.py,restart.py}
+	fperms -R 755 "${dir}"/bin/{helpers,lldb}
 	fperms -R 755 "${dir}"/jre/bin
 	fperms 755 "${dir}"/jre/lib/{jexec,jspawnhelper}
 	fperms -R 755 "${dir}"/plugins/Kotlin/kotlinc/bin
@@ -97,4 +98,19 @@ src_install() {
 	newicon "bin/studio.png" "${PN}.png"
 	make_wrapper ${PN} ${dir}/bin/studio.sh
 	make_desktop_entry ${PN} "Android Studio" ${PN} "Development;IDE" "StartupWMClass=jetbrains-studio"
+}
+
+pkg_postrm() {
+	elog "Android studio data files were not removed."
+	elog "If there will be no other programs using them anymore"
+	elog "(especially another flavor of Android Studio)"
+	elog " remove manually following folders:"
+	elog ""
+	elog "		~/.android/"
+	elog "		~/.config/Google/AndroidStudio*/"
+	elog "		~/Android/"
+	elog ""
+	elog "Also, if there are no other programs using Gradle, remove:"
+	elog ""
+	elog "		~/.gradle/"
 }
