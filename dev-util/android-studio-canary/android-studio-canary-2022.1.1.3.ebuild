@@ -5,7 +5,7 @@ EAPI=8
 
 inherit desktop wrapper
 
-RESTRICT="strip"
+RESTRICT="bindist mirror strip"
 
 QA_PREBUILT="
 	opt/${PN}/bin/*
