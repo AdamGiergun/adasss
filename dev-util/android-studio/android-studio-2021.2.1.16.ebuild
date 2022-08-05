@@ -5,7 +5,7 @@ EAPI=8
 
 inherit desktop wrapper
 
-RESTRICT="strip"
+RESTRICT="bindist mirror strip"
 
 QA_PREBUILT="
 	opt/${PN}/bin/*
@@ -33,7 +33,6 @@ QA_PREBUILT="
 DESCRIPTION="Android development environment based on IntelliJ IDEA"
 HOMEPAGE="https://developer.android.com/studio"
 SRC_URI="https://redirector.gvt1.com/edgedl/android/studio/ide-zips/${PV}/${P}-linux.tar.gz"
-#SRC_URI="https://redirector.gvt1.com/edgedl/android/studio/ide-zips/${PV}/${PN}-${PV}-linux.tar.gz"
 
 LICENSE="Apache-2.0 android BSD BSD-2 CDDL-1.1 CPL-0.5
 	EPL-1.0 GPL-2 GPL-2+ JDOM IJG LGPL-2.1 MIT
@@ -101,13 +100,14 @@ src_install() {
 }
 
 pkg_postrm() {
-	elog "Android studio data files were not removed."
+	elog "Android Studio data files were not removed."
 	elog "If there will be no other programs using them anymore"
 	elog "(especially another flavor of Android Studio)"
 	elog " remove manually following folders:"
 	elog ""
 	elog "		~/.android/"
 	elog "		~/.config/Google/AndroidStudio*/"
+	elog "		~/.local/share/Google/AndroidStudio*/"
 	elog "		~/Android/"
 	elog ""
 	elog "Also, if there are no other programs using Gradle, remove:"
