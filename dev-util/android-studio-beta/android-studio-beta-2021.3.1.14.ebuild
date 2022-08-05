@@ -100,9 +100,6 @@ src_install() {
 	make_desktop_entry ${PN} "Android Studio Beta" ${PN} "Development;IDE" "StartupWMClass=jetbrains-studio"
 }
 
-#pkg_postinst() {
-#}
-
 pkg_postrm() {
 	elog "Android Studio data files were not removed."
 	elog "If there will be no other programs using them anymore"
@@ -111,6 +108,7 @@ pkg_postrm() {
 	elog ""
 	elog "		~/.android/"
 	elog "		~/.config/Google/AndroidStudio*/"
+	elog "		~/.local/share/Google/AndroidStudio*/"
 	elog "		~/Android/"
 	elog ""
 	elog "Also, if there are no other programs using Gradle, remove:"
