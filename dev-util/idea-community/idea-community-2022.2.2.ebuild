@@ -2,37 +2,11 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
-
 inherit desktop wrapper
 
-RESTRICT="bindist mirror strip splitdebug"
-
-QA_PREBUILT="
-	opt/${PN}/bin/*
-	opt/${PN}/jbr/bin/*
-	opt/${PN}/jbr/lib/*
-	opt/${PN}/jre/lib/server/*
-	opt/${PN}/jre/lib/swiftshader/*
-	opt/${PN}/lib/pty4j-native/linux/x86/*
-	opt/${PN}/lib/pty4j-native/linux/x86-64/*
-	opt/${PN}/plugins/android/resources/native/linux/*
-	opt/${PN}/plugins/cwm-plugin/quiche-native/linux-x86-64/*
-	opt/${PN}/plugins/maven/lib/maven3/lib/jansi-native/linux32/*
-	opt/${PN}/plugins/maven/lib/maven3/lib/jansi-native/linux64/*
-	opt/${PN}/plugins/webp/lib/libwebp/linux/*
-"
-
-SLOT="0"
-
-MY_PV="$(ver_cut 1-3)"
-MY_PB="$(ver_cut 4-6)"
-MY_PN="idea"
-
-SRC_URI="https://download-cdn.jetbrains.com/idea/${MY_PN}IC-${MY_PV}.tar.gz"
-
 DESCRIPTION="A complete toolset for web, mobile and enterprise development"
-
-HOMEPAGE="https://www.jetbrains.com/idea/"
+HOMEPAGE="https://www.jetbrains.com/idea"
+SRC_URI="https://download.jetbrains.com/idea/ideaIC-${PV}.tar.gz -> idea-community-2022.2.2.tar.gz"
 
 LICENSE="Apache-2.0 BSD BSD-2 CC0-1.0 CC-BY-2.5 CDDL-1.1
 	codehaus-classworlds CPL-1.0 EPL-1.0 EPL-2.0
@@ -40,7 +14,8 @@ LICENSE="Apache-2.0 BSD BSD-2 CC0-1.0 CC-BY-2.5 CDDL-1.1
 	JDOM LGPL-2.1 LGPL-2.1+ LGPL-3-with-linking-exception MIT
 	MPL-1.0 MPL-1.1 OFL ZLIB"
 
-KEYWORDS="~amd64 ~x86"
+SLOT="0"
+KEYWORDS="~amd64 ~arm64"
 
 RDEPEND="${DEPEND}
 	sys-libs/glibc
@@ -49,16 +24,47 @@ RDEPEND="${DEPEND}
 	dev-libs/libdbusmenu"
 
 BDEPEND="dev-util/patchelf"
+RESTRICT="bindist mirror splitdebug strip"
+S="${WORKDIR}/idea-IC-${PV}"
 
-S="${WORKDIR}/${MY_PN}-IC-${MY_PB}"
+QA_PREBUILT="opt/${PN}/*"
 
-src_unpack() {
-	default_src_unpack
+# QA_PREBUILT="
+#	opt/${PN}/bin/*
+#	opt/${PN}/jbr/bin/*
+#	opt/${PN}/jbr/lib/*
+#	opt/${PN}/jre/lib/server/*
+#	opt/${PN}/jre/lib/swiftshader/*
+#	opt/${PN}/lib/pty4j-native/linux/x86/*
+#	opt/${PN}/lib/pty4j-native/linux/x86-64/*
+#	opt/${PN}/plugins/android/resources/native/linux/*
+#	opt/${PN}/plugins/cwm-plugin/quiche-native/linux-x86-64/*
+#	opt/${PN}/plugins/maven/lib/maven3/lib/jansi-native/linux32/*
+#	opt/${PN}/plugins/maven/lib/maven3/lib/jansi-native/linux64/*
+#	opt/${PN}/plugins/webp/lib/libwebp/linux/*
+# "
+
+post_src_unpack() {
+	if [ ! -d "$S" ]; then
+		einfo "Renaming source directory to predictable name..."
+		mv $(ls "${WORKDIR}") "idea-IC-${PV}" || die
+	fi
 }
 
 src_prepare() {
 
 	default_src_prepare
+
+	rm -vf "${S}"/plugins/maven/lib/maven3/lib/jansi-native/*/libjansi*
+
+#	?????????? what was/is the problem ??????????
+#	rm LLDBFrontEnd after licensing questions with Gentoo License Team
+#	rm -vf "${S}"/plugins/Kotlin/bin/linux/LLDBFrontend
+
+#	?????????? why these ??????????
+#	rm -vrf "${S}"/lib/pty4j-native/linux/ppc64le
+#	rm -vf "${S}"/lib/pty4j-native/linux/mips64el/libpty.so
+#	rm -vf "${S}"/plugins/cwm-plugin/quiche-native/linux-aarch64/libquiche.so
 
 	sed -i \
 		-e "\$a\\\\" \
@@ -87,9 +93,16 @@ src_install() {
 	fperms 755 "${dir}"/plugins/terminal/jediterm-bash.in
 	fperms -R 755 "${dir}"/plugins/wsl-fs-helper/bin
 
-	make_wrapper "${PN}" "${dir}/bin/${MY_PN}.sh"
-	newicon "bin/${MY_PN}.png" "${PN}.png"
+	local SHORT_PN="idea"
+
+	make_wrapper "${PN}" "${dir}/bin/${SHORT_PN}.sh"
+	newicon "bin/${SHORT_PN}.png" "${PN}.png"
 	make_desktop_entry "${PN}" "IntelliJ Idea Community" "${PN}" "Development;IDE;"
+
+	newenvd - 99idea-community <<-EOF
+		# Configuration file idea-community
+		IDEA_JDK="${dir}/jbr"
+	EOF
 
 	# recommended by: https://confluence.jetbrains.com/display/IDEADEV/Inotify+Watches+Limit
 	mkdir -p "${D}/etc/sysctl.d/" || die
