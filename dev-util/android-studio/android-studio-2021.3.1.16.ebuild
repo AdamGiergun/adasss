@@ -98,13 +98,23 @@ src_install() {
 	newicon "bin/studio.png" "${PN}.png"
 	make_wrapper ${PN} ${dir}/bin/studio.sh
 	make_desktop_entry ${PN} "Android Studio" ${PN} "Development;IDE" "StartupWMClass=jetbrains-studio"
+
+	# https://developer.android.com/studio/command-line/variables
+	newenvd - 99android-studio <<-EOF
+		# Configuration file android-studio
+		STUDIO_JDK="${dir}/jbr"
+	EOF
+
+	# recommended by: https://confluence.jetbrains.com/display/IDEADEV/Inotify+Watches+Limit
+	mkdir -p "${D}/etc/sysctl.d/" || die
+	echo "fs.inotify.max_user_watches = 524288" > "${D}/etc/sysctl.d/30-android-studio-inotify-watches.conf" || die
 }
 
 pkg_postrm() {
 	elog "Android Studio data files were not removed."
 	elog "If there will be no other programs using them anymore"
 	elog "(especially another flavor of Android Studio)"
-	elog " remove manually following folders:"
+	elog "remove manually following folders:"
 	elog ""
 	elog "		~/.android/"
 	elog "		~/.config/Google/AndroidStudio*/"
