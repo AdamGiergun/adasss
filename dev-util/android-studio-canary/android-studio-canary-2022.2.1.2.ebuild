@@ -64,7 +64,7 @@ RDEPEND="${DEPEND}
 	>=x11-libs/libXrender-0.9.10-r2
 	>=x11-libs/libXxf86vm-1.1.4-r2
 	>=x11-libs/libdrm-2.4.112
-	>=x11-libs/libxcb-1.15-r1
+	>=x11-libs/libxcb-1.15-r1	
 	>=x11-libs/libxshmfence-1.3-r2
 	virtual/libcrypt:=
 "
@@ -80,7 +80,7 @@ src_install() {
 	insinto "${dir}"
 	doins -r *
 
-	fperms 755 "${dir}"/bin/{fsnotifier,format.sh,inspect.sh,ltedit.sh,restart.py,studio.sh}
+	fperms 755 "${dir}"/bin/{fsnotifier,format.sh,game-tools.sh,inspect.sh,ltedit.sh,profiler.sh,restart.py,studio.sh,studio_safe.sh}
 	fperms -R 755 "${dir}"/bin/{helpers,lldb}
 	fperms -R 755 "${dir}"/jbr/bin
 	fperms 755 "${dir}"/jbr/lib/{jexec,jspawnhelper}
