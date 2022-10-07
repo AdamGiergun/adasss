@@ -64,7 +64,7 @@ RDEPEND="${DEPEND}
 	>=x11-libs/libXrender-0.9.10-r2
 	>=x11-libs/libXxf86vm-1.1.4-r2
 	>=x11-libs/libdrm-2.4.112
-	>=x11-libs/libxcb-1.15-r1	
+	>=x11-libs/libxcb-1.15-r1
 	>=x11-libs/libxshmfence-1.3-r2
 	virtual/libcrypt:=
 "

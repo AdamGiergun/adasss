@@ -5,7 +5,7 @@ EAPI=8
 inherit desktop wrapper
 
 DESCRIPTION="A complete toolset for web, mobile and enterprise development"
-HOMEPAGE="https://www.jetbrains.com/idea"
+HOMEPAGE="https://www.jetbrains.com/idea/"
 SRC_URI="https://download.jetbrains.com/idea/ideaIC-${PV}.tar.gz -> idea-community-2022.2.2.tar.gz"
 
 LICENSE="Apache-2.0 BSD BSD-2 CC0-1.0 CC-BY-2.5 CDDL-1.1
