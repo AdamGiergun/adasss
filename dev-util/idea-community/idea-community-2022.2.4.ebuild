@@ -6,7 +6,7 @@ inherit desktop wrapper
 
 DESCRIPTION="A complete toolset for web, mobile and enterprise development"
 HOMEPAGE="https://www.jetbrains.com/idea/"
-SRC_URI="https://download.jetbrains.com/idea/ideaIC-${PV}.tar.gz -> idea-community-2022.2.2.tar.gz"
+SRC_URI="https://download.jetbrains.com/idea/ideaIC-${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="Apache-2.0 BSD BSD-2 CC0-1.0 CC-BY-2.5 CDDL-1.1
 	codehaus-classworlds CPL-1.0 EPL-1.0 EPL-2.0
@@ -44,7 +44,9 @@ QA_PREBUILT="opt/${PN}/*"
 #	opt/${PN}/plugins/webp/lib/libwebp/linux/*
 # "
 
-post_src_unpack() {
+src_unpack() {
+
+	default_src_unpack
 	if [ ! -d "$S" ]; then
 		einfo "Renaming source directory to predictable name..."
 		mv $(ls "${WORKDIR}") "idea-IC-${PV}" || die
@@ -79,6 +81,7 @@ src_prepare() {
 
 src_install() {
 	local dir="/opt/${PN}"
+	local dst="${D}${dir}"
 
 	insinto "${dir}"
 	doins -r *
