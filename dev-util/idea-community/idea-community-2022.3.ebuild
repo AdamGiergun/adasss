@@ -89,18 +89,18 @@ src_install() {
 	fperms 755 "${dir}"/bin/{format.sh,idea.sh,inspect.sh,ltedit.sh,restart.py,fsnotifier,repair}
 	fperms -R 755 "${dir}"/jbr/bin
 	fperms 755 "${dir}"/jbr/lib/{chrome-sandbox,jcef_helper,jexec,jspawnhelper}
-	fperms -R 755 "${dir}"/plugins/Kotlin/bin/linux
 	fperms -R 755 "${dir}"/plugins/Kotlin/kotlinc/bin
-	fperms -R 755 "${dir}"/plugins/Kotlin/scripts
 	fperms -R 755 "${dir}"/plugins/maven/lib/maven3/bin
 	fperms 755 "${dir}"/plugins/terminal/jediterm-bash.in
-	fperms -R 755 "${dir}"/plugins/wsl-fs-helper/bin
 
-	local SHORT_PN="idea"
+	# bundled script is always lowercase, and doesn't have -ultimate, -professional suffix.
+	local bundled_script_name="${PN%-*}.sh"
+	make_wrapper "${PN}" "${dir}/bin/$bundled_script_name" || die
 
-	make_wrapper "${PN}" "${dir}/bin/${SHORT_PN}.sh"
-	newicon "bin/${SHORT_PN}.png" "${PN}.png"
-	make_desktop_entry "${PN}" "IntelliJ Idea Community" "${PN}" "Development;IDE;"
+	local pngfile="$(find ${dst}/bin -maxdepth 1 -iname '*.png')"
+	newicon $pngfile "${PN}.png" || die "we died"
+
+	make_desktop_entry "${PN}" "IntelliJ Idea Community Edition" "${PN}" "Development;IDE;"
 
 	newenvd - 99idea-community <<-EOF
 		# Configuration file idea-community
