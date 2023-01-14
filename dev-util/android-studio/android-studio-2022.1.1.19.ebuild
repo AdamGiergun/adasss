@@ -9,10 +9,10 @@ RESTRICT="bindist mirror strip"
 
 QA_PREBUILT="
 	opt/${PN}/bin/*
-	opt/${PN}/jre/bin/*
-	opt/${PN}/jre/lib/*
-	opt/${PN}/jre/lib/jli/*
-	opt/${PN}/jre/lib/server/*
+	opt/${PN}/jbr/bin/*
+	opt/${PN}/jbr/lib/*
+	opt/${PN}/jbr/lib/jli/*
+	opt/${PN}/jbr/lib/server/*
 	opt/${PN}/lib/pty4j-native/linux/*/*
 	opt/${PN}/plugins/android/resources/installer/*/*
 	opt/${PN}/plugins/android/resources/native/*
@@ -79,10 +79,10 @@ src_install() {
 	insinto "${dir}"
 	doins -r *
 
-	fperms 755 "${dir}"/bin/{fsnotifier,format.sh,game-tools.sh,inspect.sh,ltedit.sh,profiler.sh,remote-dev-server.sh,studio.sh,printenv.py,restart.py}
+	fperms 755 "${dir}"/bin/{fsnotifier,format.sh,game-tools.sh,inspect.sh,ltedit.sh,profiler.sh,remote-dev-server.sh,restart.py,studio.sh}
 	fperms -R 755 "${dir}"/bin/{helpers,lldb}
-	fperms -R 755 "${dir}"/jre/bin
-	fperms 755 "${dir}"/jre/lib/{jexec,jspawnhelper}
+	fperms -R 755 "${dir}"/jbr/bin
+	fperms 755 "${dir}"/jbr/lib/{jexec,jspawnhelper}
 	fperms -R 755 "${dir}"/plugins/Kotlin/kotlinc/bin
 	fperms -R 755 "${dir}"/plugins/android/resources/installer
 	fperms -R 755 "${dir}"/plugins/android/resources/perfetto
@@ -101,7 +101,7 @@ src_install() {
 	# https://developer.android.com/studio/command-line/variables
 	newenvd - 99android-studio <<-EOF
 		# Configuration file android-studio
-		STUDIO_JDK="${dir}/jre"
+		STUDIO_JDK="${dir}/jbr"
 	EOF
 
 	# recommended by: https://confluence.jetbrains.com/display/IDEADEV/Inotify+Watches+Limit
