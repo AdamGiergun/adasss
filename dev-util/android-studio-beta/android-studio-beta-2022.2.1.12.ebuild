@@ -26,8 +26,8 @@ QA_PREBUILT="
 	opt/${PN}/plugins/android-ndk/resources/lldb/bin/*
 	opt/${PN}/plugins/android-ndk/resources/lldb/lib/python3.9/lib-dynload/*
 	opt/${PN}/plugins/android-ndk/resources/lldb/lib64/*
-	opt/${PN}/plugins/design-tools/resources/layoutlib/data/linux/lib64/*
 	opt/${PN}/plugins/c-clangd/bin/clang/linux/*
+	opt/${PN}/plugins/design-tools/resources/layoutlib/data/linux/lib64/*
 	opt/${PN}/plugins/webp/lib/libwebp/linux/*
 "
 
@@ -80,7 +80,7 @@ src_install() {
 	insinto "${dir}"
 	doins -r *
 
-	fperms 755 "${dir}"/bin/{fsnotifier,format.sh,game-tools.sh,inspect.sh,ltedit.sh,profiler.sh,remote-dev-server.sh,restart.py,studio.sh}
+	fperms 755 "${dir}"/bin/{fsnotifier,format.sh,game-tools.sh,inspect.sh,ltedit.sh,profiler.sh,restart.py,studio.sh}
 	fperms -R 755 "${dir}"/bin/{helpers,lldb}
 	fperms -R 755 "${dir}"/jbr/bin
 	fperms 755 "${dir}"/jbr/lib/{jexec,jspawnhelper}
@@ -93,7 +93,6 @@ src_install() {
 	fperms -R 755 "${dir}"/plugins/android-ndk/resources/lldb/{android,bin,lib,shared}
 	fperms 755 "${dir}"/plugins/c-clangd/bin/clang/linux/{clang-tidy,clangd}
 	fperms -R 755 "${dir}"/plugins/terminal/{,fish}
-	fperms 755 "${dir}"/plugins/textmate/lib/bundles/git/src/{askpass-empty.sh,askpass.sh}
 
 	newicon "bin/studio.png" "${PN}.png"
 	make_wrapper ${PN} ${dir}/bin/studio.sh
