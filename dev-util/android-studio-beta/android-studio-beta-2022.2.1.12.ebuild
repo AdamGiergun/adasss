@@ -9,10 +9,10 @@ RESTRICT="bindist mirror strip"
 
 QA_PREBUILT="
 	opt/${PN}/bin/*
-	opt/${PN}/jre/bin/*
-	opt/${PN}/jre/lib/*
-	opt/${PN}/jre/lib/jli/*
-	opt/${PN}/jre/lib/server/*
+	opt/${PN}/jbr/bin/*
+	opt/${PN}/jbr/lib/*
+	opt/${PN}/jbr/lib/jli/*
+	opt/${PN}/jbr/lib/server/*
 	opt/${PN}/lib/pty4j-native/linux/*/*
 	opt/${PN}/plugins/android/resources/installer/*/*
 	opt/${PN}/plugins/android/resources/native/*
