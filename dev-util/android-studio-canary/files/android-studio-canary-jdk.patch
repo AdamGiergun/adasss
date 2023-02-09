@@ -1,0 +1,30 @@
+diff --git a/bin/studio.sh b/bin/studio.sh
+index 9382d90..aaa5858 100755
+--- a/bin/studio.sh
++++ b/bin/studio.sh
+@@ -45,13 +45,13 @@ CONFIG_HOME="${XDG_CONFIG_HOME:-${HOME}/.config}"
+ 
+ # ---------------------------------------------------------------------
+ # Locate a JRE installation directory command -v will be used to run the IDE.
+-# Try (in order): $STUDIO_JDK, .../studio.jdk, .../jbr, $JDK_HOME, $JAVA_HOME, "java" in $PATH.
++# Try (in order): $STUDIO_JDK_CANARY, .../studio.jdk, .../jbr, $JDK_HOME, $JAVA_HOME, "java" in $PATH.
+ # ---------------------------------------------------------------------
+ JRE=""
+ 
+ # shellcheck disable=SC2154
+-if [ -n "$STUDIO_JDK" ] && [ -x "$STUDIO_JDK/bin/java" ]; then
+-  JRE="$STUDIO_JDK"
++if [ -n "$STUDIO_JDK_CANARY" ] && [ -x "$STUDIO_JDK_CANARY/bin/java" ]; then
++  JRE="$STUDIO_JDK_CANARY"
+ fi
+ 
+ if [ -z "$JRE" ] && [ -s "${CONFIG_HOME}/Google/AndroidStudioPreview2022.3/studio.jdk" ]; then
+@@ -84,7 +84,7 @@ else
+ fi
+ 
+ if [ -z "$JAVA_BIN" ] || [ ! -x "$JAVA_BIN" ]; then
+-  message "No JRE found. Please make sure \$STUDIO_JDK, \$JDK_HOME, or \$JAVA_HOME point to valid JRE installation."
++  message "No JRE found. Please make sure \$STUDIO_JDK_CANARY, \$JDK_HOME, or \$JAVA_HOME point to valid JRE installation."
+   exit 1
+ fi
+ 
