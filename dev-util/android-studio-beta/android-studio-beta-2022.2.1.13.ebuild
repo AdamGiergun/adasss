@@ -71,6 +71,10 @@ RDEPEND="${DEPEND}
 
 S=${WORKDIR}/${PROG}
 
+PATCHES=(
+	"${FILESDIR}/${PN}-jdk.patch"
+)
+
 src_compile() {
 	:;
 }
@@ -97,6 +101,12 @@ src_install() {
 	newicon "bin/studio.png" "${PN}.png"
 	make_wrapper ${PN} ${dir}/bin/studio.sh
 	make_desktop_entry ${PN} "Android Studio Beta" ${PN} "Development;IDE" "StartupWMClass=jetbrains-studio"
+
+	# https://developer.android.com/studio/command-line/variables
+	newenvd - 99android-studio-beta <<-EOF
+		# Configuration file android-studio-beta
+		STUDIO_JDK_BETA="${dir}/jbr"
+	EOF
 }
 
 pkg_postrm() {
