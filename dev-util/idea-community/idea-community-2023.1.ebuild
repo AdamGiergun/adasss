@@ -59,15 +59,6 @@ src_prepare() {
 
 	rm -vf "${S}"/plugins/maven/lib/maven3/lib/jansi-native/*/libjansi*
 
-#	?????????? what was/is the problem ??????????
-#	rm LLDBFrontEnd after licensing questions with Gentoo License Team
-#	rm -vf "${S}"/plugins/Kotlin/bin/linux/LLDBFrontend
-
-#	?????????? why these ??????????
-#	rm -vrf "${S}"/lib/pty4j-native/linux/ppc64le
-#	rm -vf "${S}"/lib/pty4j-native/linux/mips64el/libpty.so
-#	rm -vf "${S}"/plugins/cwm-plugin/quiche-native/linux-aarch64/libquiche.so
-
 	sed -i \
 		-e "\$a\\\\" \
 		-e "\$a#-----------------------------------------------------------------------" \
