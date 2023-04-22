@@ -13,6 +13,7 @@ QA_PREBUILT="
 	opt/${PN}/jbr/lib/*
 	opt/${PN}/jbr/lib/jli/*
 	opt/${PN}/jbr/lib/server/*
+	opt/${PN}/lib/jna/amd64/*
 	opt/${PN}/lib/pty4j-native/linux/*/*
 	opt/${PN}/plugins/android/resources/installer/*/*
 	opt/${PN}/plugins/android/resources/native/*
@@ -24,7 +25,7 @@ QA_PREBUILT="
 	opt/${PN}/plugins/android/resources/transport/native/agent/*/*
 	opt/${PN}/plugins/android-ndk/resources/lldb/android/*/*
 	opt/${PN}/plugins/android-ndk/resources/lldb/bin/*
-	opt/${PN}/plugins/android-ndk/resources/lldb/lib/python3.9/lib-dynload/*
+	opt/${PN}/plugins/android-ndk/resources/lldb/lib/python3.10/lib-dynload/*
 	opt/${PN}/plugins/android-ndk/resources/lldb/lib64/*
 	opt/${PN}/plugins/c-clangd/bin/clang/linux/*
 	opt/${PN}/plugins/design-tools/resources/layoutlib/data/linux/lib64/*
@@ -84,7 +85,7 @@ src_install() {
 	insinto "${dir}"
 	doins -r *
 
-	fperms 755 "${dir}"/bin/{fsnotifier,format.sh,game-tools.sh,inspect.sh,ltedit.sh,profiler.sh,restart.py,studio.sh}
+	fperms 755 "${dir}"/bin/{fsnotifier,format.sh,inspect.sh,ltedit.sh,restart.py,studio.sh,studio_safe.sh}
 	fperms -R 755 "${dir}"/bin/{helpers,lldb}
 	fperms -R 755 "${dir}"/jbr/bin
 	fperms 755 "${dir}"/jbr/lib/{jexec,jspawnhelper}
@@ -95,7 +96,7 @@ src_install() {
 	fperms -R 755 "${dir}"/plugins/android/resources/trace_processor_daemon
 	fperms -R 755 "${dir}"/plugins/android/resources/transport/{arm64-v8a,armeabi-v7a,x86,x86_64}
 	fperms -R 755 "${dir}"/plugins/android-ndk/resources/lldb/{android,bin,lib,shared}
-	fperms 755 "${dir}"/plugins/c-clangd/bin/clang/linux/{clang-tidy,clangd}
+	fperms 755 "${dir}"/plugins/c-clangd/bin/clang/linux/x64/{clang-tidy,clangd}
 	fperms -R 755 "${dir}"/plugins/terminal/{,fish}
 
 	newicon "bin/studio.png" "${PN}.png"
