@@ -85,7 +85,7 @@ src_install() {
 	insinto "${dir}"
 	doins -r *
 
-	fperms 755 "${dir}"/bin/{fsnotifier,format.sh,inspect.sh,ltedit.sh,restart.py,studio.sh,studio_safe.sh}
+	fperms 755 "${dir}"/bin/{fsnotifier,*.py,*.sh}
 	fperms -R 755 "${dir}"/bin/{helpers,lldb}
 	fperms -R 755 "${dir}"/jbr/bin
 	fperms 755 "${dir}"/jbr/lib/{jexec,jspawnhelper}
