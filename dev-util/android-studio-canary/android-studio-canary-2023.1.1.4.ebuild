@@ -42,31 +42,31 @@ LICENSE="Apache-2.0 android BSD BSD-2 CDDL-1.1 CPL-0.5
 	MPL-1.1 MPL-2.0 NPL-1.1 OFL ZLIB"
 SLOT="0"
 IUSE="selinux"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64"
 
 RDEPEND="${DEPEND}
 	selinux? ( sec-policy/selinux-android )
-	>=app-arch/bzip2-1.0.8-r3
-	>=dev-libs/expat-2.4.8
-	>=dev-libs/libffi-3.4.2-r2
+	>=app-arch/bzip2-1.0.8-r4
+	>=dev-libs/expat-2.5.0
+	>=dev-libs/libffi-3.4.4
 	>=media-libs/fontconfig-2.14.0-r1
 	>=media-libs/freetype-2.12.1-r1
-	>=media-libs/libpng-1.6.37-r2
-	>=media-libs/mesa-22.1.3[X(+)]
+	>=media-libs/libpng-1.6.39
+	>=media-libs/mesa-22.2.5[X(+)]
 	|| ( gnome-extra/zenity kde-apps/kdialog x11-apps/xmessage x11-libs/libnotify )
 	sys-libs/ncurses-compat:5[tinfo]
-	>=sys-libs/zlib-1.2.12-r3
+	>=sys-libs/zlib-1.2.13-r1
 	>=x11-libs/libX11-1.8.1
-	>=x11-libs/libXau-1.0.9-r1
-	>=x11-libs/libXdamage-1.1.5
-	>=x11-libs/libXdmcp-1.1.3-r1
-	>=x11-libs/libXext-1.3.4
+	>=x11-libs/libXau-1.0.11
+	>=x11-libs/libXdamage-1.1.6
+	>=x11-libs/libXdmcp-1.1.4-r2
+	>=x11-libs/libXext-1.3.5
 	>=x11-libs/libXfixes-6.0.0
-	>=x11-libs/libXrender-0.9.10-r2
-	>=x11-libs/libXxf86vm-1.1.4-r2
-	>=x11-libs/libdrm-2.4.112
+	>=x11-libs/libXrender-0.9.11
+	>=x11-libs/libXxf86vm-1.1.5
+	>=x11-libs/libdrm-2.4.114
 	>=x11-libs/libxcb-1.15-r1
-	>=x11-libs/libxshmfence-1.3-r2
+	>=x11-libs/libxshmfence-1.3.2
 	virtual/libcrypt:=
 "
 
@@ -85,7 +85,7 @@ src_install() {
 	insinto "${dir}"
 	doins -r *
 
-	fperms 755 "${dir}"/bin/{fsnotifier,*.py,*.sh}
+	fperms 755 "${dir}"/bin/{fsnotifier,format.sh,game-tools.sh,inspect.sh,ltedit.sh,profiler.sh,restart.py,studio.sh}
 	fperms -R 755 "${dir}"/bin/{helpers,lldb}
 	fperms -R 755 "${dir}"/jbr/bin
 	fperms 755 "${dir}"/jbr/lib/{jexec,jspawnhelper}
