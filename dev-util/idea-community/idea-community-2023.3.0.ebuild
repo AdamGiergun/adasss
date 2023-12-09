@@ -79,7 +79,7 @@ src_install() {
 	insinto "${dir}"
 	doins -r *
 
-	fperms 755 "${dir}"/bin/{format.sh,idea.sh,inspect.sh,ltedit.sh,restart.py,fsnotifier,repair}
+	fperms 755 "${dir}"/bin/{format.sh,idea.sh,inspect.sh,ltedit.sh,fsnotifier,repair,restarter}
 	fperms -R 755 "${dir}"/jbr/bin
 	fperms 755 "${dir}"/jbr/lib/{chrome-sandbox,jcef_helper,jexec,jspawnhelper}
 	fperms -R 755 "${dir}"/plugins/Kotlin/kotlinc/bin
