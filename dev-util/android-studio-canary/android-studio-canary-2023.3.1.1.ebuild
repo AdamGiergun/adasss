@@ -14,10 +14,12 @@ QA_PREBUILT="
 	opt/${PN}/jbr/lib/jli/*
 	opt/${PN}/jbr/lib/server/*
 	opt/${PN}/lib/jna/amd64/*
-	opt/${PN}/lib/pty4j-native/linux/*/*
+	opt/${PN}/lib/native/linux-x86_64/*
+	opt/${PN}/lib/pty4j/linux/x86_64/*
 	opt/${PN}/plugins/android/resources/installer/*/*
 	opt/${PN}/plugins/android/resources/native/*
 	opt/${PN}/plugins/android/resources/perfetto/*/*
+	opt/${PN}/process-tracker-agent/native/*/*
 	opt/${PN}/plugins/android/resources/screen-sharing-agent/*/*
 	opt/${PN}/plugins/android/resources/simpleperf/*/*
 	opt/${PN}/plugins/android/resources/trace_processor_daemon/*
@@ -25,9 +27,10 @@ QA_PREBUILT="
 	opt/${PN}/plugins/android/resources/transport/native/agent/*/*
 	opt/${PN}/plugins/android-ndk/resources/lldb/android/*/*
 	opt/${PN}/plugins/android-ndk/resources/lldb/bin/*
+	opt/${PN}/plugins/android-ndk/resources/lldb/lib/*
 	opt/${PN}/plugins/android-ndk/resources/lldb/lib/python3.10/lib-dynload/*
 	opt/${PN}/plugins/android-ndk/resources/lldb/lib64/*
-	opt/${PN}/plugins/c-clangd/bin/clang/linux/*
+	opt/${PN}/plugins/c-clangd-plugin/bin/clang/linux/x64/*
 	opt/${PN}/plugins/design-tools/resources/layoutlib/data/linux/lib64/*
 	opt/${PN}/plugins/webp/lib/libwebp/linux/*
 "
@@ -85,7 +88,7 @@ src_install() {
 	insinto "${dir}"
 	doins -r *
 
-	fperms 755 "${dir}"/bin/{fsnotifier,format.sh,game-tools.sh,inspect.sh,ltedit.sh,profiler.sh,restart.py,studio.sh}
+	fperms 755 "${dir}"/bin/{fsnotifier,restarter,format.sh,game-tools.sh,inspect.sh,ltedit.sh,profiler.sh,studio.sh,studio_safe.sh}
 	fperms -R 755 "${dir}"/bin/{helpers,lldb}
 	fperms -R 755 "${dir}"/jbr/bin
 	fperms 755 "${dir}"/jbr/lib/{jexec,jspawnhelper}
