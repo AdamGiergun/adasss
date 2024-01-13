@@ -1,4 +1,4 @@
-# Copyright 1999-2023 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -19,7 +19,7 @@ QA_PREBUILT="
 	opt/${PN}/plugins/android/resources/installer/*/*
 	opt/${PN}/plugins/android/resources/native/*
 	opt/${PN}/plugins/android/resources/perfetto/*/*
-	opt/${PN}/process-tracker-agent/native/*/*
+	opt/${PN}/plugins/android/resources/process-tracker-agent/native/*/*
 	opt/${PN}/plugins/android/resources/screen-sharing-agent/*/*
 	opt/${PN}/plugins/android/resources/simpleperf/*/*
 	opt/${PN}/plugins/android/resources/trace_processor_daemon/*
