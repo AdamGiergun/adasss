@@ -101,3 +101,16 @@ src_install() {
 	mkdir -p "${D}/etc/sysctl.d/" || die
 	echo "fs.inotify.max_user_watches = 524288" > "${D}/etc/sysctl.d/30-idea-inotify-watches.conf" || die
 }
+
+pkg_postrm() {
+	elog "Idea Community data files were not removed."
+	elog "If there will be no other applications using them anymore"
+	elog "remove manually following folders:"
+	elog ""
+	elog "		~/.config/JetBrains/IdeaIC*/"
+	elog "		~/.local/share/JetBrains/IdeaIC*/"
+	elog ""
+	elog "Also, if there will be no other applications using Gradle, remove:"
+	elog ""
+	elog "		~/.gradle/"
+}
