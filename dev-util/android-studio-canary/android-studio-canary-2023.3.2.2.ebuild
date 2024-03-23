@@ -47,7 +47,7 @@ SLOT="0"
 IUSE="selinux"
 KEYWORDS="~amd64"
 
-RDEPEND="${DEPEND}
+RDEPEND="
 	selinux? ( sec-policy/selinux-android )
 	>=app-arch/bzip2-1.0.8-r4
 	>=dev-libs/expat-2.5.0
@@ -72,6 +72,8 @@ RDEPEND="${DEPEND}
 	>=x11-libs/libxshmfence-1.3.2
 	virtual/libcrypt:=
 "
+
+DEPEND=${RDEPEND}
 
 S=${WORKDIR}/${PROG}
 
