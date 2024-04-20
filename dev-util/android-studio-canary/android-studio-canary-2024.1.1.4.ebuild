@@ -5,8 +5,6 @@ EAPI=8
 
 inherit desktop wrapper
 
-RESTRICT="bindist mirror strip"
-
 QA_PREBUILT="
 	opt/${PN}/bin/*
 	opt/${PN}/jbr/bin/*
@@ -40,12 +38,16 @@ HOMEPAGE="https://developer.android.com/studio/preview/index.html"
 PROG="android-studio"
 SRC_URI="https://redirector.gvt1.com/edgedl/android/studio/ide-zips/${PV}/${PROG}-${PV}-linux.tar.gz"
 
+S=${WORKDIR}/${PROG}
+
 LICENSE="Apache-2.0 android BSD BSD-2 CDDL-1.1 CPL-0.5
 	EPL-1.0 GPL-2 GPL-2+ JDOM IJG LGPL-2.1 MIT
 	MPL-1.1 MPL-2.0 NPL-1.1 OFL ZLIB"
+
 SLOT="0"
-IUSE="selinux"
 KEYWORDS="~amd64"
+IUSE="selinux"
+RESTRICT="bindist mirror strip"
 
 RDEPEND="
 	selinux? ( sec-policy/selinux-android )
@@ -74,8 +76,6 @@ RDEPEND="
 "
 
 DEPEND=${RDEPEND}
-
-S=${WORKDIR}/${PROG}
 
 PATCHES=(
 	"${FILESDIR}/${PN}-jdk.patch"
