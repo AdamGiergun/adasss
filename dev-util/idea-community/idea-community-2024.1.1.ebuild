@@ -2,17 +2,21 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
+
 inherit desktop wrapper
 
 MY_PV=$(ver_cut 1-2)
 
 DESCRIPTION="A complete toolset for web, mobile and enterprise development"
+
 HOMEPAGE="https://www.jetbrains.com/idea/"
 
 SRC_URI="
 	amd64? ( https://download.jetbrains.com/idea/ideaIC-${MY_PV}.tar.gz -> ${P}-amd64.tar.gz )
 	arm64? ( https://download.jetbrains.com/idea/ideaIC-${MY_PV}-aarch64.tar.gz -> ${P}-aarch64.tar.gz )
 	"
+
+S="${WORKDIR}/idea-IC-${PV}"
 
 LICENSE="Apache-2.0 BSD BSD-2 CC0-1.0 CC-BY-2.5 CDDL-1.1
 	codehaus-classworlds CPL-1.0 EPL-1.0 EPL-2.0
@@ -21,6 +25,7 @@ LICENSE="Apache-2.0 BSD BSD-2 CC0-1.0 CC-BY-2.5 CDDL-1.1
 	MPL-1.0 MPL-1.1 OFL ZLIB"
 
 SLOT="0"
+
 KEYWORDS="~amd64 ~arm64"
 
 RDEPEND="${DEPEND}
@@ -30,8 +35,8 @@ RDEPEND="${DEPEND}
 	dev-libs/libdbusmenu"
 
 BDEPEND="dev-util/patchelf"
+
 RESTRICT="bindist mirror splitdebug strip"
-S="${WORKDIR}/idea-IC-${PV}"
 
 QA_PREBUILT="opt/${PN}/*"
 
