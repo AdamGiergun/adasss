@@ -34,8 +34,11 @@ QA_PREBUILT="
 "
 
 DESCRIPTION="Android development environment based on IntelliJ IDEA"
+
 HOMEPAGE="https://developer.android.com/studio/preview/index.html"
+
 PROG="android-studio"
+
 SRC_URI="https://redirector.gvt1.com/edgedl/android/studio/ide-zips/${PV}/${PROG}-${PV}-linux.tar.gz"
 
 S=${WORKDIR}/${PROG}
@@ -45,8 +48,11 @@ LICENSE="Apache-2.0 android BSD BSD-2 CDDL-1.1 CPL-0.5
 	MPL-1.1 MPL-2.0 NPL-1.1 OFL ZLIB"
 
 SLOT="0"
+
 KEYWORDS="~amd64"
+
 IUSE="selinux"
+
 RESTRICT="bindist mirror strip"
 
 RDEPEND="
