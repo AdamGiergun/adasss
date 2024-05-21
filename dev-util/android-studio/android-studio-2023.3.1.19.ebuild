@@ -5,26 +5,6 @@ EAPI=8
 
 inherit desktop wrapper
 
-DESCRIPTION="Android development environment based on IntelliJ IDEA"
-
-HOMEPAGE="https://developer.android.com/studio"
-
-SRC_URI="https://redirector.gvt1.com/edgedl/android/studio/ide-zips/${PV}/${P}-linux.tar.gz"
-
-S=${WORKDIR}/${PN}
-
-LICENSE="Apache-2.0 android BSD BSD-2 CDDL-1.1 CPL-0.5
-	EPL-1.0 GPL-2 GPL-2+ JDOM IJG LGPL-2.1 MIT
-	MPL-1.1 MPL-2.0 NPL-1.1 OFL ZLIB"
-
-SLOT="0"
-
-KEYWORDS="~amd64"
-
-IUSE="selinux"
-
-RESTRICT="bindist mirror strip"
-
 QA_PREBUILT="
 	opt/${PN}/bin/*
 	opt/${PN}/jbr/bin/*
@@ -52,6 +32,26 @@ QA_PREBUILT="
 	opt/${PN}/plugins/design-tools/resources/layoutlib/data/linux/lib64/*
 	opt/${PN}/plugins/webp/lib/libwebp/linux/*
 "
+
+DESCRIPTION="Android development environment based on IntelliJ IDEA"
+
+HOMEPAGE="https://developer.android.com/studio"
+
+SRC_URI="https://redirector.gvt1.com/edgedl/android/studio/ide-zips/${PV}/${P}-linux.tar.gz"
+
+S=${WORKDIR}/${PN}
+
+LICENSE="Apache-2.0 android BSD BSD-2 CDDL-1.1 CPL-0.5
+	EPL-1.0 GPL-2 GPL-2+ JDOM IJG LGPL-2.1 MIT
+	MPL-1.1 MPL-2.0 NPL-1.1 OFL-1.1 ZLIB"
+
+SLOT="0"
+
+KEYWORDS="~amd64"
+
+IUSE="selinux"
+
+RESTRICT="bindist mirror strip"
 
 RDEPEND="${DEPEND}
 	selinux? ( sec-policy/selinux-android )
