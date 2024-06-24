@@ -5,7 +5,7 @@ EAPI=8
 
 inherit desktop wrapper
 
-MY_PV=$(ver_cut 1-2)
+MY_PV=$(ver_cut 1-3)
 
 DESCRIPTION="A complete toolset for web, mobile and enterprise development"
 
@@ -17,7 +17,6 @@ SRC_URI="
 	"
 
 S="${WORKDIR}/idea-IC-${PV}"
-
 LICENSE="Apache-2.0 BSD BSD-2 CC0-1.0 CC-BY-2.5 CDDL-1.1
 	codehaus-classworlds CPL-1.0 EPL-1.0 EPL-2.0
 	GPL-2 GPL-2-with-classpath-exception ISC
@@ -25,7 +24,6 @@ LICENSE="Apache-2.0 BSD BSD-2 CC0-1.0 CC-BY-2.5 CDDL-1.1
 	MPL-1.0 MPL-1.1 OFL-1.1 ZLIB"
 
 SLOT="0"
-
 KEYWORDS="~amd64 ~arm64"
 
 RDEPEND="${DEPEND}
