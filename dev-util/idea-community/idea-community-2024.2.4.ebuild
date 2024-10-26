@@ -5,7 +5,7 @@ EAPI=8
 
 inherit desktop wrapper
 
-MY_PV=$(ver_cut 1-4)
+MY_PV=$(ver_cut 1-3)
 
 DESCRIPTION="A complete toolset for web, mobile and enterprise development"
 
@@ -30,7 +30,29 @@ RDEPEND="${DEPEND}
 	sys-libs/glibc
 	media-libs/harfbuzz
 	dev-java/jansi-native
-	dev-libs/libdbusmenu"
+	sys-libs/zlib
+	x11-libs/libX11
+	x11-libs/libXrender
+	media-libs/freetype
+	x11-libs/libXext
+	dev-libs/wayland
+	x11-libs/libXi
+	x11-libs/libXtst
+	x11-libs/libXcomposite
+	x11-libs/libXdamage
+	x11-libs/libXrandr
+	media-libs/alsa-lib
+	app-accessibility/at-spi2-core
+	x11-libs/cairo
+	net-print/cups
+	x11-libs/libdrm
+	media-libs/mesa
+	dev-libs/nspr
+	dev-libs/nss
+	dev-libs/libdbusmenu
+	x11-libs/libxkbcommon
+	x11-libs/libXcursor
+	x11-libs/pango"
 
 BDEPEND="dev-util/patchelf"
 
@@ -65,8 +87,6 @@ src_unpack() {
 src_prepare() {
 
 	default_src_prepare
-
-	rm -vf "${S}"/plugins/maven/lib/maven3/lib/jansi-native/*/libjansi*
 
 	sed -i \
 		-e "\$a\\\\" \
