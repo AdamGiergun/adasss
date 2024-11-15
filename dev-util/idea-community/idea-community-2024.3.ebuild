@@ -5,7 +5,7 @@ EAPI=8
 
 inherit desktop wrapper
 
-MY_PV=$(ver_cut 1-3)
+MY_PV=$(ver_cut 1-2)
 
 DESCRIPTION="A complete toolset for web, mobile and enterprise development"
 
@@ -106,7 +106,7 @@ src_install() {
 	insinto "${dir}"
 	doins -r *
 
-	fperms 755 "${dir}"/bin/{format.sh,idea.sh,inspect.sh,jetbrains_client.sh,ltedit.sh,fsnotifier,idea,repair,restarter}
+	fperms 755 "${dir}"/bin/{format.sh,idea.sh,inspect.sh,jetbrains_client.sh,ltedit.sh,fsnotifier,idea,restarter}
 	fperms -R 755 "${dir}"/jbr/bin
 	fperms 755 "${dir}"/jbr/lib/{chrome-sandbox,jcef_helper,jexec,jspawnhelper}
 	fperms -R 755 "${dir}"/plugins/Kotlin/kotlinc/bin
