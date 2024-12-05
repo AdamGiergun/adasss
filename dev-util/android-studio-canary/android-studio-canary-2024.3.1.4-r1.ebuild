@@ -50,12 +50,15 @@ SLOT="0"
 
 KEYWORDS="~amd64"
 
-IUSE="selinux"
+IUSE="experimental selinux wayland"
+
+REQUIRED_USE="experimental? ( wayland )"
 
 RESTRICT="bindist mirror strip"
 
 RDEPEND="
 	selinux? ( sec-policy/selinux-android )
+	wayland? ( dev-libs/wayland )
 	>=app-arch/bzip2-1.0.8-r4
 	>=dev-libs/expat-2.5.0
 	>=dev-libs/libffi-3.4.4
@@ -109,8 +112,18 @@ src_install() {
 	fperms 755 "${dir}"/plugins/c-clangd-plugin/bin/clang/linux/x64/bin/clangd
 
 	newicon "bin/studio.png" "${PN}.png"
-	make_wrapper ${PN} ${dir}/bin/studio
 	make_desktop_entry ${PN} "Android Studio Canary" ${PN} "Development;IDE" "StartupWMClass=jetbrains-studio"
+
+	if use experimental; then
+		make_wrapper ${PN} "${dir}/bin/studio -Dawt.toolkit.name=WLToolkit"
+		make_desktop_entry "${dir}/bin/studio -Dawt.toolkit.name=WLToolkit" "Android Studio Canary" ${PN}
+		    "Development;IDE" "StartupWMClass=jetbrains-studio"
+		ewarn "You have enabled the experimental USE flag."
+		ewarn "This is a Wayland support preview. Expect instability."
+	else
+		make_wrapper ${PN} ${dir}/bin/studio
+		make_desktop_entry ${PN} "Android Studio Canary" ${PN} "Development;IDE" "StartupWMClass=jetbrains-studio"
+	fi
 
 	# https://developer.android.com/studio/command-line/variables
 	newenvd - 99android-studio-canary <<-EOF
