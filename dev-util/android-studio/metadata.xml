@@ -5,4 +5,7 @@
 		<email>adasss@poczta.onet.pl</email>
 		<name>adasss</name>
 	</maintainer>
+	<use>
+		<flag name="experimental">Enables Wayland support preview.</flag>
+	</use>
 </pkgmetadata>
