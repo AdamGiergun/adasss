@@ -112,18 +112,16 @@ src_install() {
 	fperms 755 "${dir}"/plugins/c-clangd-plugin/bin/clang/linux/x64/bin/clangd
 
 	newicon "bin/studio.png" "${PN}.png"
-	make_desktop_entry ${PN} "Android Studio Canary" ${PN} "Development;IDE" "StartupWMClass=jetbrains-studio"
 
 	if use experimental; then
 		make_wrapper ${PN} "${dir}/bin/studio -Dawt.toolkit.name=WLToolkit"
-		make_desktop_entry "${dir}/bin/studio -Dawt.toolkit.name=WLToolkit" "Android Studio Canary" ${PN}
-		    "Development;IDE" "StartupWMClass=jetbrains-studio"
 		ewarn "You have enabled the experimental USE flag."
 		ewarn "This is a Wayland support preview. Expect instability."
 	else
 		make_wrapper ${PN} ${dir}/bin/studio
-		make_desktop_entry ${PN} "Android Studio Canary" ${PN} "Development;IDE" "StartupWMClass=jetbrains-studio"
 	fi
+
+	make_desktop_entry ${PN} "Android Studio Canary" ${PN} "Development;IDE" "StartupWMClass=jetbrains-studio"
 
 	# https://developer.android.com/studio/command-line/variables
 	newenvd - 99android-studio-canary <<-EOF
