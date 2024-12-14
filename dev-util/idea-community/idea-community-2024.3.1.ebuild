@@ -5,7 +5,7 @@ EAPI=8
 
 inherit desktop wrapper
 
-MY_PV=$(ver_cut 1-2)
+MY_PV=$(ver_cut 1-3)
 
 DESCRIPTION="A complete toolset for web, mobile and enterprise development"
 
@@ -24,7 +24,12 @@ LICENSE="Apache-2.0 BSD BSD-2 CC0-1.0 CC-BY-2.5 CDDL-1.1
 	MPL-1.0 MPL-1.1 OFL-1.1 ZLIB"
 
 SLOT="0"
+
 KEYWORDS="~amd64 ~arm64"
+
+IUSE="experimental wayland"
+
+REQUIRED_USE="experimental? ( wayland )"
 
 RDEPEND="${DEPEND}
 	sys-libs/glibc
@@ -119,7 +124,16 @@ src_install() {
 	local pngfile="$(find ${dst}/bin -maxdepth 1 -iname '*.png')"
 	newicon $pngfile "${PN}.png" || die "we died"
 
-	make_desktop_entry "/opt/idea-community/bin/idea" "IntelliJ Idea Community Edition" "${PN}" "Development;IDE;"
+	if use experimental; then
+		make_desktop_entry "/opt/idea-community/bin/idea -Dawt.toolkit.name=WLToolkit"
+			"IntelliJ Idea Community Edition" "${PN}" "Development;IDE;"
+
+		ewarn "You have enabled the experimental USE flag."
+		ewarn "This is a Wayland support preview. Expect instability."
+	else
+		make_desktop_entry "/opt/idea-community/bin/idea"
+			"IntelliJ Idea Community Edition" "${PN}" "Development;IDE;"
+	fi
 
 	newenvd - 99idea-community <<-EOF
 		# Configuration file idea-community
