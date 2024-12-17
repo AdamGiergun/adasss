@@ -31,6 +31,7 @@ If you want to support my work in any way you could at least write "Hello" here:
 
 Since Android Studio Ladybug (2024.2.1) there is experimental Wayland support via -Dawt.toolkit.name=WLToolkit option. It can be added:
 
+    via enabling experimental and wayland USE flags
     to the end of the command line invocation,
     via Help -> Edit Custom VM Options,
     directly to the ~/.config/Google/AndroidStudio<version>/studio64.vmoptions file.
