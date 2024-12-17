@@ -27,3 +27,12 @@ Also, if you haven't seen it yet, take a look at the [official Gentoo Wiki artic
 
 If you want to support my work in any way you could at least write "Hello" here: [Welcome topic](https://github.com/AdamGiergun/adasss/discussions/1)
 
+##### Wayland
+
+Since Android Studio Ladybug (2024.2.1) there is experimental Wayland support via -Dawt.toolkit.name=WLToolkit option. It can be added:
+
+    to the end of the command line invocation,
+    via Help -> Edit Custom VM Options,
+    directly to the ~/.config/Google/AndroidStudio<version>/studio64.vmoptions file.
+
+It can be verified by selecting Help -> About -> Copy and Close and reviewing the text copied this way. If Wayland support is properly enabled and working, it should contain the line: Toolkit: sun.awt.wl.WLToolkit, otherwise the line may look like this: Toolkit: sun.awt.X11.XToolkit. 
