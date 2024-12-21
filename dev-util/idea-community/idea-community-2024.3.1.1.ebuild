@@ -5,7 +5,7 @@ EAPI=8
 
 inherit desktop wrapper
 
-MY_PV=$(ver_cut 1-3)
+MY_PV=$(ver_cut 1-4)
 
 DESCRIPTION="A complete toolset for web, mobile and enterprise development"
 
@@ -58,8 +58,6 @@ RDEPEND="${DEPEND}
 	x11-libs/libxkbcommon
 	x11-libs/libXcursor
 	x11-libs/pango"
-
-BDEPEND="dev-util/patchelf"
 
 RESTRICT="bindist mirror splitdebug strip"
 
