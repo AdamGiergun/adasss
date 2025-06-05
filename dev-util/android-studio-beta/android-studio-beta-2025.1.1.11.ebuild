@@ -121,12 +121,12 @@ src_install() {
 		make_wrapper ${PN} ${dir}/bin/studio
 	fi
 
-	make_desktop_entry ${PN} "Android Studio Canary" ${PN} "Development;IDE" "StartupWMClass=jetbrains-studio"
+	make_desktop_entry ${PN} "Android Studio Beta" ${PN} "Development;IDE" "StartupWMClass=jetbrains-studio"
 
 	# https://developer.android.com/studio/command-line/variables
-	newenvd - 99android-studio-canary <<-EOF
-		# Configuration file android-studio-canary
-		STUDIO_JDK_CANARY="${dir}/jbr"
+	newenvd - 99android-studio-beta <<-EOF
+		# Configuration file android-studio-beta
+		STUDIO_JDK_BETA="${dir}/jbr"
 	EOF
 }
 
