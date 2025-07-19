@@ -79,6 +79,7 @@ RDEPEND="
 	>=x11-libs/libXxf86vm-1.1.5
 	>=x11-libs/libdrm-2.4.114
 	>=x11-libs/libxcb-1.15-r1
+	sys-libs/libxcrypt[compat]
 	>=x11-libs/libxshmfence-1.3.2
 	virtual/libcrypt:=
 "
@@ -88,6 +89,18 @@ DEPEND=${RDEPEND}
 PATCHES=(
 	"${FILESDIR}/${PN}-jdk.patch"
 )
+
+src_prepare() {
+	default
+
+	cat <<-EOF >> bin/idea.properties || die
+	#-----------------------------------------------------------------------
+	# Disable automatic updates as these are handled through Gentoo's
+	# package manager.
+	#-----------------------------------------------------------------------
+	ide.no.platform.update=Gentoo
+	EOF
+}
 
 src_compile() {
 	:;
