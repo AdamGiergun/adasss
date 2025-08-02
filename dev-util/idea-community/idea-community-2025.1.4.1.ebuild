@@ -5,7 +5,7 @@ EAPI=8
 
 inherit desktop wrapper
 
-MY_PV=$(ver_cut 1-3)
+MY_PV=$(ver_cut 1-4)
 
 DESCRIPTION="A complete toolset for web, mobile and enterprise development"
 
@@ -30,6 +30,8 @@ KEYWORDS="~amd64 ~arm64"
 IUSE="experimental wayland"
 
 REQUIRED_USE="experimental? ( wayland )"
+
+DEPEND=">=virtual/jdk-17:*"
 
 RDEPEND="${DEPEND}
 	sys-libs/glibc
