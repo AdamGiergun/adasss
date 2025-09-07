@@ -111,7 +111,8 @@ src_install() {
 	insinto "${dir}"
 	doins -r *
 
-	fperms 755 "${dir}"/bin/{fsnotifier,restarter,studio,format.sh,game-tools.sh,inspect.sh,ltedit.sh,profiler.sh,studio.sh}
+	fperms 755 "${dir}"/bin/{fsnotifier,restarter,studio,format.sh}
+	fperms 755 "${dir}"/bin/{game-tools.sh,inspect.sh,ltedit.sh,profiler.sh,studio.sh}
 	fperms -R 755 "${dir}"/bin/{helpers,lldb}
 	fperms -R 755 "${dir}"/jbr/bin
 	fperms 755 "${dir}"/jbr/lib/{jexec,jspawnhelper}
