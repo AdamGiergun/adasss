@@ -86,9 +86,9 @@ RDEPEND="
 
 DEPEND=${RDEPEND}
 
-PATCHES=(
-	"${FILESDIR}/${PN}-jdk.patch"
-)
+#PATCHES=(
+#	"${FILESDIR}/${PN}-jdk.patch"
+#)
 
 src_prepare() {
 	default
@@ -139,8 +139,9 @@ src_install() {
 
 	# https://developer.android.com/studio/command-line/variables
 	newenvd - 99android-studio-canary <<-EOF
+		# Disables it, as it seems no longer needed
 		# Configuration file android-studio-canary
-		STUDIO_JDK_CANARY="${dir}/jbr"
+		# STUDIO_JDK_CANARY="${dir}/jbr"
 	EOF
 }
 
