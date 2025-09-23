@@ -28,7 +28,6 @@ QA_PREBUILT="
 	opt/${PN}/plugins/android-ndk/resources/lldb/lib/*
 	opt/${PN}/plugins/android-ndk/resources/lldb/lib/python3.10/lib-dynload/*
 	opt/${PN}/plugins/android-ndk/resources/lldb/lib64/*
-	opt/${PN}/plugins/c-clangd-plugin/bin/clang/linux/x64/bin/*
 	opt/${PN}/plugins/design-tools/resources/layoutlib/data/linux/lib64/*
 	opt/${PN}/plugins/webp/lib/libwebp/linux/*
 "
@@ -123,7 +122,6 @@ src_install() {
 	fperms -R 755 "${dir}"/plugins/android/resources/trace_processor_daemon
 	fperms -R 755 "${dir}"/plugins/android/resources/transport/{arm64-v8a,armeabi-v7a,x86,x86_64}
 	fperms -R 755 "${dir}"/plugins/android-ndk/resources/lldb/{android,bin,lib,shared}
-	fperms 755 "${dir}"/plugins/c-clangd/bin/clang/linux/x64/bin/clangd
 
 	newicon "bin/studio.png" "${PN}.png"
 
