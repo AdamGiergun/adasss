@@ -64,8 +64,8 @@ RDEPEND="
 	>=media-libs/libpng-1.6.39
 	>=media-libs/mesa-22.2.5[X(+)]
 	|| ( gnome-extra/zenity kde-apps/kdialog x11-apps/xmessage x11-libs/libnotify )
+	sys-libs/libxcrypt[compat]
 	sys-libs/ncurses-compat:5[tinfo]
-	>=sys-libs/zlib-1.2.13-r1
 	>=x11-libs/libX11-1.8.1
 	>=x11-libs/libXau-1.0.11
 	>=x11-libs/libXdamage-1.1.6
@@ -76,9 +76,9 @@ RDEPEND="
 	>=x11-libs/libXxf86vm-1.1.5
 	>=x11-libs/libdrm-2.4.114
 	>=x11-libs/libxcb-1.15-r1
-	sys-libs/libxcrypt[compat]
 	>=x11-libs/libxshmfence-1.3.2
 	virtual/libcrypt:=
+	>=virtual/zlib-1.2.13-r1:=
 "
 
 DEPEND=${RDEPEND}
