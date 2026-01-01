@@ -1,6 +1,6 @@
 This is my repository for Gentoo packages. Contains:
  * experimental packages for Android Studio (stable, beta and canary) to be able for installing these side by side.
- * experimental packages for IntelliJ IDEA Community (uses built-in JBR 17).<br>
+ * experimental packages for IntelliJ IDEA (uses built-in JBR 21).<br>
     Built-in version of JBR differs from standalone, because it contains some add-ons for product with which it is shipped: 
     [Some info about it](https://intellij-support.jetbrains.com/hc/en-us/community/posts/360010476759-Why-do-I-need-the-JetBrains-version-of-products-with-JBR-and-why-is-this-version-not-available-now-).<br>
     Installing built-in version doesn't mean that it have to be used for development. It can be changed in `File -> Project Structure`
@@ -15,7 +15,7 @@ Of course, if you want to use my packages immediately, don't forget to do:
 ```
 If you don't want use some of my packages you can mask them in `/etc/portage/package.mask`, for example:
 ```
-    dev-util/idea-community::adasss
+    dev-util/intellij-idea::adasss
 ```
 It is possible to report bugs on [Gentoo Bugzilla](https://bugs.gentoo.org/) by starting title with (e.g.): 
 ```
