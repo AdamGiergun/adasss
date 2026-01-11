@@ -4,7 +4,7 @@
 EAPI=8
 inherit check-reqs desktop wrapper
 
-MY_PV=idea-$(ver_cut 1-3)
+MY_PV=idea-$(ver_cut 1-4)
 
 DESCRIPTION="A complete toolset for web, mobile and enterprise development"
 
@@ -148,7 +148,7 @@ src_install() {
 
 	if use experimental; then
 		make_desktop_entry "/opt/intellij-idea/bin/idea -Dawt.toolkit.name=WLToolkit" \
-			"IntelliJ IDEA Community Edition" "${PN}" "Development;IDE;"
+			"IntelliJ IDEA" "${PN}" "Development;IDE;"
 
 		ewarn "You have enabled the experimental USE flag."
 		ewarn "This is a Wayland support preview. Expect instability."
