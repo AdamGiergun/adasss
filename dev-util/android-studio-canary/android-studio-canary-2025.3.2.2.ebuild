@@ -14,6 +14,7 @@ QA_PREBUILT="
 	opt/${PN}/lib/jna/amd64/*
 	opt/${PN}/lib/native/linux-x86_64/*
 	opt/${PN}/lib/pty4j/linux/x86_64/*
+	opt/${PN}/lib/skiko-awt-runtime-all/*
 	opt/${PN}/plugins/android/resources/installer/*/*
 	opt/${PN}/plugins/android/resources/native/*
 	opt/${PN}/plugins/android/resources/perfetto/*/*
