@@ -14,6 +14,7 @@ QA_PREBUILT="
 	opt/${PN}/lib/jna/amd64/*
 	opt/${PN}/lib/native/linux-x86_64/*
 	opt/${PN}/lib/pty4j/linux/x86_64/*
+	opt/${PN}/lib/skiko-awt-runtime-all/*
 	opt/${PN}/plugins/android/resources/installer/*/*
 	opt/${PN}/plugins/android/resources/native/*
 	opt/${PN}/plugins/android/resources/perfetto/*/*
@@ -38,7 +39,7 @@ HOMEPAGE="https://developer.android.com/studio/preview/index.html"
 
 PROG="android-studio"
 
-SRC_URI="https://redirector.gvt1.com/edgedl/android/studio/ide-zips/${PV}/${PROG}-panda1-rc1-linux.tar.gz"
+SRC_URI="https://redirector.gvt1.com/edgedl/android/studio/ide-zips/${PV}/${PROG}-panda2-rc1-linux.tar.gz"
 
 S=${WORKDIR}/${PROG}
 
