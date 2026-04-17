@@ -37,7 +37,7 @@ DESCRIPTION="Android development environment based on IntelliJ IDEA"
 
 HOMEPAGE="https://developer.android.com/studio"
 
-SRC_URI="https://redirector.gvt1.com/edgedl/android/studio/ide-zips/${PV}/${PN}-panda3-linux.tar.gz"
+SRC_URI="https://redirector.gvt1.com/edgedl/android/studio/ide-zips/${PV}/${PN}-panda3-patch1-linux.tar.gz"
 
 S=${WORKDIR}/${PN}
 
