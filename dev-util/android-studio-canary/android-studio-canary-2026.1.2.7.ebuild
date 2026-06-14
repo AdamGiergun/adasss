@@ -39,7 +39,7 @@ HOMEPAGE="https://developer.android.com/studio/preview/index.html"
 
 PROG="android-studio"
 
-SRC_URI="https://edgedl.me.gvt1.com/android/studio/ide-zips/${PV}/${PROG}-quail2-canary6-linux.tar.gz"
+SRC_URI="https://edgedl.me.gvt1.com/android/studio/ide-zips/${PV}/${PROG}-quail2-canary7-linux.tar.gz"
 
 S=${WORKDIR}/${PROG}
 
@@ -50,9 +50,7 @@ SLOT="0"
 
 KEYWORDS="~amd64"
 
-IUSE="experimental selinux wayland"
-
-REQUIRED_USE="experimental? ( wayland )"
+IUSE="selinux wayland"
 
 RESTRICT="bindist mirror strip"
 
@@ -126,13 +124,7 @@ src_install() {
 
 	newicon "bin/studio.png" "${PN}.png"
 
-	if use experimental; then
-		make_wrapper ${PN} "${dir}/bin/studio -Dawt.toolkit.name=WLToolkit"
-		ewarn "You have enabled the experimental USE flag."
-		ewarn "This is a Wayland support preview. Expect instability."
-	else
-		make_wrapper ${PN} ${dir}/bin/studio
-	fi
+	make_wrapper ${PN} ${dir}/bin/studio
 
 	make_desktop_entry ${PN} "Android Studio Canary" ${PN} "Development;IDE" "StartupWMClass=jetbrains-studio"
 
