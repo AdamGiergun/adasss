@@ -24,9 +24,8 @@ LICENSE="Apache-2.0 BSD BSD-2 CC0-1.0 CC-BY-2.5 CDDL-1.1
 
 SLOT="0"
 KEYWORDS="~amd64 ~arm64"
-IUSE="bundled-xvfb experimental professional wayland"
-REQUIRED_USE="experimental? ( wayland )
-	professional? ( || ( bundled-xvfb !bundled-xvfb ) )
+IUSE="bundled-xvfb professional wayland"
+REQUIRED_USE="	professional? ( || ( bundled-xvfb !bundled-xvfb ) )
 	bundled-xvfb? ( professional )"
 
 DEPEND=">=virtual/jdk-17:*"
@@ -146,16 +145,8 @@ src_install() {
 	local pngfile="$(find ${dst}/bin -maxdepth 1 -iname '*.png')"
 	newicon $pngfile "${PN}.png" || die "we died"
 
-	if use experimental; then
-		make_desktop_entry "/opt/intellij-idea/bin/idea -Dawt.toolkit.name=WLToolkit" \
-			"IntelliJ IDEA" "${PN}" "Development;IDE;"
-
-		ewarn "You have enabled the experimental USE flag."
-		ewarn "This is a Wayland support preview. Expect instability."
-	else
-		make_desktop_entry "/opt/intellij-idea/bin/idea" \
-			"IntelliJ IDEA" "${PN}" "Development;IDE;"
-	fi
+	make_desktop_entry "/opt/intellij-idea/bin/idea" \
+		"IntelliJ IDEA" "${PN}" "Development;IDE;"
 
 	newenvd - 99idea-community <<-EOF
 		# Configuration file idea-community
