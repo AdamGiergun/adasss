@@ -104,10 +104,6 @@ src_prepare() {
 		-e "\$a#-----------------------------------------------------------------------" \
 		-e "\$aide.no.platform.update=Gentoo"  bin/idea.properties
 
-	patchelf --set-rpath '$ORIGIN' "jbr/lib/libjcef.so" || die
-	patchelf --set-rpath '$ORIGIN' "jbr/lib/libcef.so" || die
-	patchelf --set-rpath '$ORIGIN' "jbr/lib/jcef_helper" || die
-
 	if use bundled-xvfb; then
 		patchelf --set-rpath '$ORIGIN/../lib' "${S}"/plugins/remote-dev-server/selfcontained/bin/{Xvfb,xkbcomp} || die
 		patchelf --set-rpath '$ORIGIN' "${S}"/plugins/remote-dev-server/selfcontained/lib/lib*.so* || die
@@ -118,7 +114,7 @@ src_prepare() {
 	fi
 
 	if ! use elibc_musl; then
-		rm plugins/platform-ijent-impl/ijent-aarch64-unknown-linux-musl-release
+		rm plugins/platform-ijent-bundledBinaries/ijent-aarch64-unknown-linux-musl-release
 	fi
 
 	eapply_user
@@ -133,9 +129,9 @@ src_install() {
 
 	fperms 755 "${dir}"/bin/{format.sh,idea.sh,inspect.sh,jetbrains_client.sh,ltedit.sh,fsnotifier,idea,restarter}
 	fperms -R 755 "${dir}"/jbr/bin
-	fperms 755 "${dir}"/jbr/lib/{chrome-sandbox,jcef_helper,jexec,jspawnhelper}
+	fperms 755 "${dir}"/jbr/lib/{jexec,jspawnhelper}
 	fperms -R 755 "${dir}"/plugins/Kotlin/kotlinc/bin
-	fperms -R 755 "${dir}"/plugins/maven/lib/maven3/bin
+	fperms -R 755 "${dir}"/plugins/maven-plugin/lib/maven3/bin
 
 	# bundled script is always lowercase, and doesn't have -ultimate, -professional suffix.
 	local bundled_script_name="${PN#*-}.sh"
