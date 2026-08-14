@@ -4,7 +4,7 @@
 EAPI=8
 inherit check-reqs desktop wrapper
 
-MY_PV=idea-$(ver_cut 1-4)
+MY_PV=idea-$(ver_cut 1-3)
 
 DESCRIPTION="A complete toolset for web, mobile and enterprise development"
 
@@ -24,8 +24,8 @@ LICENSE="Apache-2.0 BSD BSD-2 CC0-1.0 CC-BY-2.5 CDDL-1.1
 
 SLOT="0"
 KEYWORDS="~amd64 ~arm64"
-IUSE="bundled-xvfb professional wayland"
-REQUIRED_USE="	professional? ( || ( bundled-xvfb !bundled-xvfb ) )
+IUSE="bundled-xvfb professional"
+REQUIRED_USE="professional? ( || ( bundled-xvfb !bundled-xvfb ) )
 	bundled-xvfb? ( professional )"
 
 DEPEND=">=virtual/jdk-17:*"
@@ -127,10 +127,12 @@ src_install() {
 	insinto "${dir}"
 	doins -r *
 
-	fperms 755 "${dir}"/bin/{format.sh,idea.sh,inspect.sh,jetbrains_client.sh,ltedit.sh,fsnotifier,idea,restarter}
+	fperms 755 "${dir}"/bin/{format.sh,idea.sh,inspect.sh,jetbrains_client.sh,ltedit.sh,fsnotifier,idea,idea.sh,restarter}
+	if use bundled-xvfb; then
+		fperms 755 "${dir}"/bin/remote-dev-server.sh
+	fi
 	fperms -R 755 "${dir}"/jbr/bin
 	fperms 755 "${dir}"/jbr/lib/{jexec,jspawnhelper}
-	fperms -R 755 "${dir}"/plugins/Kotlin/kotlinc/bin
 	fperms -R 755 "${dir}"/plugins/maven-plugin/lib/maven3/bin
 
 	# bundled script is always lowercase, and doesn't have -ultimate, -professional suffix.
