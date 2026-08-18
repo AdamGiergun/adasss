@@ -13,7 +13,7 @@ QA_PREBUILT="
 	opt/${PN}/jbr/lib/server/*
 	opt/${PN}/lib/jna/amd64/*
 	opt/${PN}/lib/native/linux-x86_64/*
-	opt/${PN}/lib/pty4j/linux/x86_64/*
+	opt/${PN}/lib/pty4j/linux/x86-64/*
 	opt/${PN}/lib/skiko-awt-runtime-all/*
 	opt/${PN}/plugins/android/resources/installer/*/*
 	opt/${PN}/plugins/android/resources/native/*
@@ -22,14 +22,17 @@ QA_PREBUILT="
 	opt/${PN}/plugins/android/resources/screen-sharing-agent/*/*
 	opt/${PN}/plugins/android/resources/simpleperf/*/*
 	opt/${PN}/plugins/android/resources/trace_processor_daemon/*
+	opt/${PN}/plugins/android/resources/trace_processor_server/*
 	opt/${PN}/plugins/android/resources/transport/*/*
 	opt/${PN}/plugins/android/resources/transport/native/agent/*/*
 	opt/${PN}/plugins/android-ndk/resources/lldb/android/*/*
 	opt/${PN}/plugins/android-ndk/resources/lldb/bin/*
 	opt/${PN}/plugins/android-ndk/resources/lldb/lib/*
-	opt/${PN}/plugins/android-ndk/resources/lldb/lib/python3.10/lib-dynload/*
+	opt/${PN}/plugins/android-ndk/resources/lldb/lib/python3.11/lib-dynload/*
 	opt/${PN}/plugins/android-ndk/resources/lldb/lib64/*
+	opt/${PN}/plugins/cidr-clangd/bin/clang/linux/x64/bin/*
 	opt/${PN}/plugins/design-tools/resources/layoutlib/data/linux/lib64/*
+	opt/${PN}/plugins/gemini/resources/llamacpp/*
 	opt/${PN}/plugins/webp/lib/libwebp/linux/*
 "
 
@@ -39,7 +42,7 @@ HOMEPAGE="https://developer.android.com/studio/preview/index.html"
 
 PROG="android-studio"
 
-SRC_URI="https://edgedl.me.gvt1.com/android/studio/ide-zips/${PV}/${PROG}-quail4-canary4-linux.tar.gz"
+SRC_URI="https://edgedl.me.gvt1.com/android/studio/ide-zips/${PV}/${PROG}-rabbit1-canary1-linux.tar.gz"
 
 S=${WORKDIR}/${PROG}
 
@@ -106,12 +109,12 @@ src_compile() {
 
 src_install() {
 	local dir="/opt/${PN}"
+	local macholib="${dir}/plugins/android-ndk/resources/lldb/lib/python3.11/ctypes/macholib"
 	insinto "${dir}"
 	doins -r *
 
 	fperms 755 "${dir}"/bin/{fsnotifier,restarter,studio,format.sh}
 	fperms 755 "${dir}"/bin/{game-tools.sh,inspect.sh,ltedit.sh,profiler.sh,studio.sh}
-	fperms -R 755 "${dir}"/bin/{helpers,lldb}
 	fperms -R 755 "${dir}"/jbr/bin
 	fperms 755 "${dir}"/jbr/lib/{jexec,jspawnhelper}
 	fperms -R 755 "${dir}"/plugins/Kotlin/kotlinc/bin
@@ -119,8 +122,12 @@ src_install() {
 	fperms -R 755 "${dir}"/plugins/android/resources/perfetto
 	fperms -R 755 "${dir}"/plugins/android/resources/simpleperf
 	fperms -R 755 "${dir}"/plugins/android/resources/trace_processor_daemon
+	fperms -R 755 "${dir}"/plugins/android/resources/trace_processor_server
 	fperms -R 755 "${dir}"/plugins/android/resources/transport/{arm64-v8a,armeabi-v7a,x86,x86_64}
-	fperms -R 755 "${dir}"/plugins/android-ndk/resources/lldb/{android,bin,lib,shared}
+	fperms -R 755 "${dir}"/plugins/android-ndk/resources/lldb/{android,bin,shared}
+	fperms 755 "${macholib}"/{fetch_macholib,fetch_macholib.bat}
+	fperms 755 "${dir}"/plugins/cidr-clangd/bin/clang/linux/x64/bin/clangd
+	fperms -R 755 "${dir}"/plugins/gemini/resources/llamacpp
 
 	newicon "bin/studio.png" "${PN}.png"
 
