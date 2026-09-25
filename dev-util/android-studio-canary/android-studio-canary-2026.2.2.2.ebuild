@@ -28,7 +28,7 @@ QA_PREBUILT="
 	opt/${PN}/plugins/android-ndk/resources/lldb/android/*/*
 	opt/${PN}/plugins/android-ndk/resources/lldb/bin/*
 	opt/${PN}/plugins/android-ndk/resources/lldb/lib/*
-	opt/${PN}/plugins/android-ndk/resources/lldb/lib/python3.11/lib-dynload/*
+	opt/${PN}/plugins/android-ndk/resources/lldb/lib/python3.13/lib-dynload/*
 	opt/${PN}/plugins/android-ndk/resources/lldb/lib64/*
 	opt/${PN}/plugins/cidr-clangd/bin/clang/linux/x64/bin/*
 	opt/${PN}/plugins/design-tools/resources/layoutlib/data/linux/lib64/*
@@ -42,7 +42,7 @@ HOMEPAGE="https://developer.android.com/studio/preview/index.html"
 
 PROG="android-studio"
 
-SRC_URI="https://edgedl.me.gvt1.com/android/studio/ide-zips/${PV}/${PROG}-rabbit2-canary1-linux.tar.gz"
+SRC_URI="https://edgedl.me.gvt1.com/android/studio/ide-zips/${PV}/${PROG}-rabbit2-canary2-linux.tar.gz"
 
 S=${WORKDIR}/${PROG}
 
@@ -109,7 +109,7 @@ src_compile() {
 
 src_install() {
 	local dir="/opt/${PN}"
-	local macholib="${dir}/plugins/android-ndk/resources/lldb/lib/python3.11/ctypes/macholib"
+	local macholib="${dir}/plugins/android-ndk/resources/lldb/lib/python3.13/ctypes/macholib"
 	insinto "${dir}"
 	doins -r *
 
