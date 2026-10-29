@@ -9,12 +9,12 @@ QA_PREBUILT="
 	opt/${PN}/bin/*
 	opt/${PN}/jbr/bin/*
 	opt/${PN}/jbr/lib/*
-	opt/${PN}/jbr/lib/jli/*
 	opt/${PN}/jbr/lib/server/*
 	opt/${PN}/lib/jna/amd64/*
 	opt/${PN}/lib/native/linux-x86_64/*
 	opt/${PN}/lib/pty4j/linux/x86-64/*
 	opt/${PN}/lib/skiko-awt-runtime-all/*
+	opt/${PN}/plugins/android/resources/android-cli/bin/*
 	opt/${PN}/plugins/android/resources/installer/*/*
 	opt/${PN}/plugins/android/resources/native/*
 	opt/${PN}/plugins/android/resources/perfetto/*/*
@@ -23,6 +23,7 @@ QA_PREBUILT="
 	opt/${PN}/plugins/android/resources/simpleperf/*/*
 	opt/${PN}/plugins/android/resources/trace_processor_daemon/*
 	opt/${PN}/plugins/android/resources/trace_processor_server/*
+	opt/${PN}/plugins/android/resources/traceconv/*
 	opt/${PN}/plugins/android/resources/transport/*/*
 	opt/${PN}/plugins/android/resources/transport/native/agent/*/*
 	opt/${PN}/plugins/android-ndk/resources/lldb/android/*/*
@@ -42,7 +43,7 @@ HOMEPAGE="https://developer.android.com/studio/preview/index.html"
 
 PROG="android-studio"
 
-SRC_URI="https://edgedl.me.gvt1.com/android/studio/ide-zips/${PV}/${PROG}-rabbit3-canary1-linux.tar.gz"
+SRC_URI="https://edgedl.me.gvt1.com/android/studio/ide-zips/${PV}/${PROG}-rabbit3-canary2-linux.tar.gz"
 
 S=${WORKDIR}/${PROG}
 
@@ -118,11 +119,13 @@ src_install() {
 	fperms -R 755 "${dir}"/jbr/bin
 	fperms 755 "${dir}"/jbr/lib/{jexec,jspawnhelper}
 	fperms -R 755 "${dir}"/plugins/Kotlin/kotlinc/bin
+	fperms -R 755 "${dir}"/plugins/android/resources/android-cli/bin
 	fperms -R 755 "${dir}"/plugins/android/resources/installer
 	fperms -R 755 "${dir}"/plugins/android/resources/perfetto
 	fperms -R 755 "${dir}"/plugins/android/resources/simpleperf
 	fperms -R 755 "${dir}"/plugins/android/resources/trace_processor_daemon
 	fperms -R 755 "${dir}"/plugins/android/resources/trace_processor_server
+	fperms -R 755 "${dir}"/plugins/android/resources/traceconv
 	fperms -R 755 "${dir}"/plugins/android/resources/transport/{arm64-v8a,armeabi-v7a,x86,x86_64}
 	fperms -R 755 "${dir}"/plugins/android-ndk/resources/lldb/{android,bin,shared}
 	fperms 755 "${macholib}"/{fetch_macholib,fetch_macholib.bat}
