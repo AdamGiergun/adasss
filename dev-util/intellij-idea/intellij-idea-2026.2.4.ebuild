@@ -1,4 +1,4 @@
-# Copyright 1999-2025 Gentoo Authors
+# Copyright 1999-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -80,7 +80,7 @@ pkg_pretend() {
 
 pkg_setup() {
 	CHECKREQS_DISK_BUILD="4G"
-	check-reqs_pkg_pretend
+	check-reqs_pkg_setup
 }
 
 src_unpack() {
@@ -103,6 +103,14 @@ src_prepare() {
 		-e "\$a# package manager. See bug #704494" \
 		-e "\$a#-----------------------------------------------------------------------" \
 		-e "\$aide.no.platform.update=Gentoo"  bin/idea.properties
+
+	# upstream ships RPATH ".:$ORIGIN" (loads libs from CWD) on these
+	patchelf --set-rpath '$ORIGIN' plugins/jcef-plugin/jcef/{libjcef.so,jcef_helper} || die
+	# upstream build-machine path leaked into RPATH, lib needs only libc
+	local f
+	for f in plugins/cwm-plugin/quiche-native/*/libquiche.so; do
+		[[ -f ${f} ]] && { patchelf --remove-rpath "${f}" || die; }
+	done
 
 	if use bundled-xvfb; then
 		patchelf --set-rpath '$ORIGIN/../lib' "${S}"/plugins/remote-dev-server/selfcontained/bin/{Xvfb,xkbcomp} || die
@@ -127,13 +135,12 @@ src_install() {
 	insinto "${dir}"
 	doins -r *
 
-	fperms 755 "${dir}"/bin/{format.sh,idea.sh,inspect.sh,jetbrains_client.sh,ltedit.sh,fsnotifier,idea,idea.sh,restarter}
-	if use bundled-xvfb; then
-		fperms 755 "${dir}"/bin/remote-dev-server.sh
-	fi
-	fperms -R 755 "${dir}"/jbr/bin
-	fperms 755 "${dir}"/jbr/lib/{jexec,jspawnhelper}
-	fperms -R 755 "${dir}"/plugins/maven-plugin/lib/maven3/bin
+	# doins resets all modes to 0644; restore executable bits as shipped upstream
+	# (launchers, jbr, jcef helpers, ijent, kotlinc, maven, bundled Xvfb, ...)
+	local f
+	while IFS= read -r -d '' f; do
+		fperms 755 "${dir}/${f#./}"
+	done < <(find . -type f -perm -u+x -print0)
 
 	# bundled script is always lowercase, and doesn't have -ultimate, -professional suffix.
 	local bundled_script_name="${PN#*-}.sh"
