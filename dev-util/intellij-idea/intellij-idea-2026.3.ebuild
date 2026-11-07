@@ -4,7 +4,7 @@
 EAPI=8
 inherit check-reqs desktop wrapper
 
-MY_PV=idea-$(ver_cut 1-3)
+MY_PV=idea-$(ver_cut 1-2)
 
 DESCRIPTION="A complete toolset for web, mobile and enterprise development"
 
@@ -28,9 +28,7 @@ IUSE="bundled-xvfb professional"
 REQUIRED_USE="professional? ( || ( bundled-xvfb !bundled-xvfb ) )
 	bundled-xvfb? ( professional )"
 
-DEPEND=">=virtual/jdk-17:*"
-
-RDEPEND="${DEPEND}
+RDEPEND="
 	professional? ( bundled-xvfb? (
 			dev-libs/libpcre2
 			sys-libs/pam
@@ -42,7 +40,6 @@ RDEPEND="${DEPEND}
 	)
 	sys-libs/glibc
 	media-libs/harfbuzz
-	dev-java/jansi-native
 	virtual/zlib:=
 	x11-libs/libX11
 	x11-libs/libXrender
@@ -108,7 +105,7 @@ src_prepare() {
 	patchelf --set-rpath '$ORIGIN' plugins/jcef-plugin/jcef/{libjcef.so,jcef_helper} || die
 	# upstream build-machine path leaked into RPATH, lib needs only libc
 	local f
-	for f in plugins/cwm-plugin/quiche-native/*/libquiche.so; do
+	for f in plugins/*/quiche-native/*/libquiche.so; do
 		[[ -f ${f} ]] && { patchelf --remove-rpath "${f}" || die; }
 	done
 
@@ -122,7 +119,7 @@ src_prepare() {
 	fi
 
 	if ! use elibc_musl; then
-		rm plugins/platform-ijent-bundledBinaries/ijent-aarch64-unknown-linux-musl-release
+		rm lib/ijent/ijent-aarch64-unknown-linux-musl-release || die
 	fi
 
 	eapply_user
