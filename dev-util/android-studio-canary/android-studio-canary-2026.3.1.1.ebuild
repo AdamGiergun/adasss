@@ -10,10 +10,6 @@ QA_PREBUILT="
 	opt/${PN}/jbr/bin/*
 	opt/${PN}/jbr/lib/*
 	opt/${PN}/jbr/lib/server/*
-	opt/${PN}/lib/jna/amd64/*
-	opt/${PN}/lib/native/linux-x86_64/*
-	opt/${PN}/lib/pty4j/linux/x86-64/*
-	opt/${PN}/lib/skiko-awt-runtime-all/*
 	opt/${PN}/plugins/android/resources/android-cli/bin/*
 	opt/${PN}/plugins/android/resources/installer/*/*
 	opt/${PN}/plugins/android/resources/native/*
@@ -34,6 +30,11 @@ QA_PREBUILT="
 	opt/${PN}/plugins/cidr-clangd/bin/clang/linux/x64/bin/*
 	opt/${PN}/plugins/design-tools/resources/layoutlib/data/linux/lib64/*
 	opt/${PN}/plugins/gemini/resources/llamacpp/*
+	opt/${PN}/plugins/jna-plugin/lib/jna/amd64/*
+	opt/${PN}/plugins/platform-compose-plugin/lib/skiko-awt-runtime-all/*
+	opt/${PN}/plugins/platform-vcs-plugin/lib/native/linux-x86_64/*
+	opt/${PN}/plugins/pty4j-plugin/lib/pty4j/linux/x86-64/*
+	opt/${PN}/plugins/terminal/libghostty-vt/linux-x86_64/*
 	opt/${PN}/plugins/webp/lib/libwebp/linux/*
 "
 
@@ -43,7 +44,7 @@ HOMEPAGE="https://developer.android.com/studio/preview/index.html"
 
 PROG="android-studio"
 
-SRC_URI="https://edgedl.me.gvt1.com/android/studio/ide-zips/${PV}/${PROG}-rabbit3-canary3-linux.tar.gz"
+SRC_URI="https://edgedl.me.gvt1.com/android/studio/ide-zips/${PV}/${PROG}-stingray1-canary1-linux.tar.gz"
 
 S=${WORKDIR}/${PROG}
 
@@ -115,7 +116,7 @@ src_install() {
 	doins -r *
 
 	fperms 755 "${dir}"/bin/{fsnotifier,restarter,studio,format.sh}
-	fperms 755 "${dir}"/bin/{game-tools.sh,inspect.sh,ltedit.sh,profiler.sh,studio.sh}
+	fperms 755 "${dir}"/bin/{inspect.sh,ltedit.sh,studio.sh}
 	fperms -R 755 "${dir}"/jbr/bin
 	fperms 755 "${dir}"/jbr/lib/{jexec,jspawnhelper}
 	fperms -R 755 "${dir}"/plugins/Kotlin/kotlinc/bin
